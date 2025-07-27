@@ -9,7 +9,7 @@ public class Course {
   public Course(String title, int duration, String professor){
     this.title = title;
     this.duration = duration;
-    this.professor = professor.isEmpty() ? "Unnasigned" : professor;
+    this.professor = professor.trim().isEmpty() ? "Unnasigned" : professor;
   }
   public void setTitle(String title) {
     this.title = title;
