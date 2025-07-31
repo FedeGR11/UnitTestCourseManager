@@ -2,12 +2,14 @@ package com.coursemanagement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.api.BeforeEach;
-
 
 
 public class OnlineCourseTest {
@@ -17,6 +19,7 @@ public class OnlineCourseTest {
         System.out.println("Inicializando antes de un test");
     }
 
+    @Tag("regression")
     @DisplayName("Probando setPlataform()")
     @ParameterizedTest
     @CsvFileSource(resources = "/onlinecourses.csv", numLinesToSkip = 1)
@@ -26,6 +29,18 @@ public class OnlineCourseTest {
         assertEquals("Campus Bios", onlineCourse.getPlataform());
     }
 
+    @Tag("regression")
+    @ParameterizedTest
+    @NullSource
+    @DisplayName("Test con plataforma nula o vacía")
+    void testPlataformNull(String plataform) {
+        OnlineCourse onlineCourse = new OnlineCourse("Java", 20, "Fede", "a");
+        onlineCourse.setPlataform(plataform);
+        Assertions.assertNull(onlineCourse.getPlataform());
+
+    }
+
+    @Tag("smoke")
     @DisplayName("Muestra informacion del curso")
     @Test
     void testShowInformation() {

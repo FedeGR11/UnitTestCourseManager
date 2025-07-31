@@ -5,11 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.api.Tag;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class OnSiteCourseTest {
 
     @BeforeAll
@@ -22,6 +27,8 @@ public class OnSiteCourseTest {
         System.out.println("Finalizando test");
     }
 
+    @Tag("regression")
+    @Order(2)
     @DisplayName("Probando setMaxQuota()")
     @ParameterizedTest
     @CsvFileSource(resources = "/onsitecourses.csv", numLinesToSkip = 1)
@@ -31,6 +38,8 @@ public class OnSiteCourseTest {
         assertEquals(25, onSiteCourse.getMaxQuota());
     }
     
+    @Tag("regression")
+    @Order(3)
     @DisplayName("Probando setRoom() para todos los cursos")
     @ParameterizedTest
     @CsvSource ({
@@ -43,6 +52,8 @@ public class OnSiteCourseTest {
         assertEquals(8, onSiteCourse.getRoom());
     }
     
+    @Tag("smoke")
+    @Order(1)
     @DisplayName("Muestra informacion del curso")
     @Test
     void testShowInformation() {
